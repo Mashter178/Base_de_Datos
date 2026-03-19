@@ -7,9 +7,11 @@ const cursosRoutes = require('./cursos');
 const publicacionesRoutes = require('./publicaciones');
 
 const app = express();
+// Middleware base para permitir peticiones del frontend y body JSON.
 app.use(cors());
 app.use(express.json());
 
+// Endpoint de salud para comprobar que MySQL responde.
 app.get('/api/ping-db', async (req, res) => {
     try {
         await pool.query('SELECT 1');
@@ -19,6 +21,7 @@ app.get('/api/ping-db', async (req, res) => {
     }
 });
 
+// Rutas principales del MVP.
 app.use('/api/cursos', cursosRoutes);
 app.use('/api/publicaciones', publicacionesRoutes);
 

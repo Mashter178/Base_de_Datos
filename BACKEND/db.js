@@ -1,5 +1,6 @@
 const mysql = require('mysql2/promise');
 
+// Pool de conexiones reutilizable para todas las consultas del backend.
 const pool = mysql.createPool({
     host: process.env.DB_HOST,
     port: Number(process.env.DB_PORT || 3306),

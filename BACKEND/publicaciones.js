@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const pool = require('./db');
 
+// Feed de publicaciones con nombre de usuario y curso.
 router.get('/', async (req, res) => {
   try {
     const sql = `
@@ -25,6 +26,7 @@ router.get('/', async (req, res) => {
   }
 });
 
+// Crea una nueva publicacion validando campos minimos requeridos.
 router.post('/', async (req, res) => {
   try {
     const { id_usuario, id_curso, titulo, contenido } = req.body;
@@ -37,6 +39,7 @@ router.post('/', async (req, res) => {
       INSERT INTO Publicacion (id_usuario, id_curso, titulo, contenido, fecha_publicacion)
       VALUES (?, ?, ?, ?, CURDATE())
     `;
+    // Parametros preparados para evitar inyeccion SQL.
     const [result] = await pool.query(sql, [id_usuario, id_curso, titulo, contenido]);
 
     res.status(201).json({

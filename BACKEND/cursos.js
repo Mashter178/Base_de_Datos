@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const pool = require('./db');
 
+// Lista de cursos junto al catedratico asignado.
 router.get('/', async (req, res) => {
   try {
     const sql = `
@@ -17,6 +18,7 @@ router.get('/', async (req, res) => {
       ORDER BY c.id_curso DESC
     `;
     const [rows] = await pool.query(sql);
+    // Devuelve arreglo JSON para consumo directo en frontend.
     res.json(rows);
   } catch (error) {
     res.status(500).json({ error: error.message });
