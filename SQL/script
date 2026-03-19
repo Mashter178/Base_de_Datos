@@ -1,0 +1,70 @@
+Create database IF NOT EXISTS fiusac_rate;
+USE fiusac_rate;
+
+
+CREATE TABLE Usuario (
+    id_usuario      INT auto_increment  NOT NULL,
+    nombre          VARCHAR(100),
+    apellido        VARCHAR(100),
+    correo          VARCHAR(150),
+    fecha_registro  DATE,
+    CONSTRAINT PK_Usuario PRIMARY KEY (id_usuario)
+);
+
+CREATE TABLE Catedratico (
+    id_catedratico INT auto_increment  NOT NULL,
+    nombre          VARCHAR(100),
+    apellido        VARCHAR(100),
+    especialidad    VARCHAR(150),
+    CONSTRAINT PK_Catedratico PRIMARY KEY (id_catedratico)
+);
+
+CREATE TABLE Curso (
+    id_curso        INT auto_increment  NOT NULL,
+    nombre_curso    VARCHAR(150),
+    creditos        INT,
+    id_catedratico  INT,
+    CONSTRAINT PK_Curso PRIMARY KEY (id_curso),
+    CONSTRAINT FK_Curso_Catedratico FOREIGN KEY (id_catedratico)
+        REFERENCES Catedratico (id_catedratico)
+);
+
+CREATE TABLE Curso_Aprobado (
+    id_curso_aprobado   INT auto_increment  NOT NULL,
+    id_usuario          INT,
+    id_curso            INT,
+    nota_final          INT,
+    fecha_aprobacion    DATE,
+    CONSTRAINT PK_Curso_Aprobado PRIMARY KEY (id_curso_aprobado),
+    CONSTRAINT FK_CursoAprobado_Usuario FOREIGN KEY (id_usuario)
+        REFERENCES Usuario (id_usuario),
+    CONSTRAINT FK_CursoAprobado_Curso FOREIGN KEY (id_curso)
+        REFERENCES Curso (id_curso)
+);
+
+CREATE TABLE Publicacion (
+    id_publicacion      INT auto_increment  NOT NULL,
+    id_usuario          INT,
+    id_curso            INT,
+    titulo              VARCHAR(200),
+    contenido           Text,
+    fecha_publicacion   DATE,
+    CONSTRAINT PK_Publicacion PRIMARY KEY (id_publicacion),
+    CONSTRAINT FK_Publicacion_Usuario FOREIGN KEY (id_usuario)
+        REFERENCES Usuario (id_usuario),
+    CONSTRAINT FK_Publicacion_Curso FOREIGN KEY (id_curso)
+        REFERENCES Curso (id_curso)
+);
+
+CREATE TABLE Comentario (
+    id_comentario       INT auto_increment  NOT NULL,
+    id_publicacion      INT,
+    id_usuario          INT,
+    texto               Text,
+    fecha_comentario    DATE,
+    CONSTRAINT PK_Comentario PRIMARY KEY (id_comentario),
+    CONSTRAINT FK_Comentario_Publicacion FOREIGN KEY (id_publicacion)
+        REFERENCES Publicacion (id_publicacion),
+    CONSTRAINT FK_Comentario_Usuario FOREIGN KEY (id_usuario)
+        REFERENCES Usuario (id_usuario)
+);
