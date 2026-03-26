@@ -1,0 +1,55 @@
+-- ============================================
+-- COMANDOS CLAVE PARA USAR EN PHPMYADMIN (XAMPP)
+-- ============================================
+
+-- 1) Ver bases de datos
+SHOW DATABASES;
+
+-- 2) Usar una base
+USE fiusac;
+
+-- 3) Ver tablas
+SHOW TABLES;
+
+-- 4) Ver estructura de una tabla
+DESCRIBE Usuario;
+DESCRIBE Curso;
+DESCRIBE Publicacion;
+
+-- 5) Consultas basicas
+SELECT * FROM Usuario;
+SELECT * FROM Catedratico;
+SELECT * FROM Curso;
+SELECT * FROM Publicacion;
+SELECT * FROM Comentario;
+
+-- 6) Consulta join util (feed)
+SELECT
+  p.id_publicacion,
+  p.titulo,
+  p.contenido,
+  p.fecha_publicacion,
+  u.nombre AS usuario_nombre,
+  u.apellido AS usuario_apellido,
+  c.nombre_curso
+FROM Publicacion p
+JOIN Usuario u ON p.id_usuario = u.id_usuario
+JOIN Curso c ON p.id_curso = c.id_curso
+ORDER BY p.id_publicacion DESC;
+
+-- 7) Insert rapido de prueba
+INSERT INTO Publicacion (id_usuario, id_curso, titulo, contenido, fecha_publicacion)
+VALUES (1, 1, 'Prueba rapida', 'Mensaje de prueba.', CURDATE());
+
+-- 8) Validar que se guardo
+SELECT * FROM Publicacion ORDER BY id_publicacion DESC;
+
+-- 9) Borrar solo datos (sin borrar tablas)
+SET FOREIGN_KEY_CHECKS = 0;
+TRUNCATE TABLE Comentario;
+TRUNCATE TABLE Publicacion;
+TRUNCATE TABLE Curso_Aprobado;
+TRUNCATE TABLE Curso;
+TRUNCATE TABLE Catedratico;
+TRUNCATE TABLE Usuario;
+SET FOREIGN_KEY_CHECKS = 1;

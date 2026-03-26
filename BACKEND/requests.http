@@ -1,0 +1,21 @@
+GET http://localhost:3000/api/ping-db
+
+###
+
+GET http://localhost:3000/api/cursos
+
+###
+
+GET http://localhost:3000/api/publicaciones
+
+###
+
+POST http://localhost:3000/api/publicaciones
+Content-Type: application/json
+
+{
+  "id_usuario": 1,
+  "id_curso": 1,
+  "titulo": "Prueba desde REST Client",
+  "contenido": "Todo funciona"
+}
