@@ -2,7 +2,7 @@ import { useState } from "react";
 import api from "../services/api";
 
 export default function Login({ onLogin, onGoRegister }) {
-	const [correo, setCorreo] = useState("");
+	const [identificador, setIdentificador] = useState("");
 	const [password, setPassword] = useState("");
 	const [error, setError] = useState("");
 	const [loading, setLoading] = useState(false);
@@ -12,7 +12,7 @@ export default function Login({ onLogin, onGoRegister }) {
 		try {
 			setLoading(true);
 			setError("");
-			const { data } = await api.post("/login", { correo, password });
+			const { data } = await api.post("/login", { correo: identificador, password });
 			onLogin(data);
 		} catch (err) {
 			setError(err?.response?.data?.error || "No se pudo iniciar sesion");
@@ -25,9 +25,9 @@ export default function Login({ onLogin, onGoRegister }) {
 		<form onSubmit={submit} className="panel form-grid auth-panel">
 			<h2>Iniciar sesion</h2>
 			<input
-				placeholder="Correo"
-				value={correo}
-				onChange={(e) => setCorreo(e.target.value)}
+				placeholder="Registro academico / CUI / Correo"
+				value={identificador}
+				onChange={(e) => setIdentificador(e.target.value)}
 			/>
 			<input
 				type="password"

@@ -29,7 +29,7 @@ body {
 }
 
 .app-shell {
-  max-width: 980px;
+  max-width: min(1760px, 96vw);
   margin: 0 auto;
   padding: 22px 14px 40px;
 }
@@ -106,6 +106,39 @@ button:disabled {
   margin-bottom: 10px;
 }
 
+.feed-layout {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 14px;
+  align-items: start;
+}
+
+.feed-side {
+  position: sticky;
+  top: 12px;
+}
+
+.posts-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.comments-list {
+  max-height: 210px;
+  overflow-y: auto;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 8px 10px;
+  background: #fff;
+}
+
+.muted-text {
+  margin: 2px 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
 .post-card h3 {
   margin: 0 0 5px;
 }
@@ -125,6 +158,18 @@ button:disabled {
 }
 
 @media (max-width: 720px) {
+  .feed-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .feed-side {
+    position: static;
+  }
+
+  .posts-grid {
+    grid-template-columns: 1fr;
+  }
+
   .topbar {
     flex-direction: column;
     align-items: flex-start;
@@ -132,5 +177,26 @@ button:disabled {
 
   .brand {
     font-size: 24px;
+  }
+}
+
+@media (min-width: 721px) and (max-width: 1060px) {
+  .feed-layout {
+    grid-template-columns: 300px 1fr;
+  }
+
+  .posts-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 1400px) {
+  .feed-layout {
+    grid-template-columns: 380px 1fr;
+    gap: 16px;
+  }
+
+  .posts-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }

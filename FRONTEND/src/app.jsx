@@ -38,7 +38,7 @@ function App() {
   return (
     <main className="app-shell">
       <header className="topbar">
-        <h1 className="brand">FIUSAC Rate</h1>
+        <h1 className="brand">FIUSAC</h1>
         {isAuthenticated ? (
           <div className="actions-row">
             <button onClick={() => setView("feed")}>Inicio</button>

@@ -2,6 +2,7 @@ import { useState } from "react";
 import api from "../services/api";
 
 export default function Register({ onGoLogin }) {
+	const [registroAcademico, setRegistroAcademico] = useState("");
 	const [nombre, setNombre] = useState("");
 	const [apellido, setApellido] = useState("");
 	const [correo, setCorreo] = useState("");
@@ -16,7 +17,7 @@ export default function Register({ onGoLogin }) {
 			setLoading(true);
 			setError("");
 			setMessage("");
-			await api.post("/register", { nombre, apellido, correo, password });
+			await api.post("/register", { registroAcademico, nombre, apellido, correo, password });
 			setMessage("Registro exitoso. Ahora puedes iniciar sesion.");
 		} catch (err) {
 			setError(err?.response?.data?.error || "No se pudo registrar usuario");
@@ -28,8 +29,9 @@ export default function Register({ onGoLogin }) {
 	return (
 		<form onSubmit={submit} className="panel form-grid auth-panel">
 			<h2>Registro</h2>
-			<input placeholder="Nombre" value={nombre} onChange={(e) => setNombre(e.target.value)} />
-			<input placeholder="Apellido" value={apellido} onChange={(e) => setApellido(e.target.value)} />
+			<input placeholder="Registro academico" value={registroAcademico} onChange={(e) => setRegistroAcademico(e.target.value)} />
+			<input placeholder="Nombres" value={nombre} onChange={(e) => setNombre(e.target.value)} />
+			<input placeholder="Apellidos" value={apellido} onChange={(e) => setApellido(e.target.value)} />
 			<input placeholder="Correo" value={correo} onChange={(e) => setCorreo(e.target.value)} />
 			<input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
 			{error ? <p className="error-text">{error}</p> : null}
