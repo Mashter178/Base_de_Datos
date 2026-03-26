@@ -1,4 +1,4 @@
-import Feed from "./components/Feed.jsx";
+import Feed from "./components/feed.jsx";
 
 function App() {
   return (

@@ -3,8 +3,8 @@ const express = require('express');
 const cors = require('cors');
 const pool = require('./db');
 
-const cursosRoutes = require('./cursos');
-const publicacionesRoutes = require('./publicaciones');
+const cursosRoutes = require('./routes/cursos');
+const publicacionesRoutes = require('./routes/publicaciones');
 
 const app = express();
 // Middleware base para permitir peticiones del frontend y body JSON.
