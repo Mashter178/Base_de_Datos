@@ -1,21 +1,41 @@
-GET http://localhost:3000/api/ping-db
+@baseUrl = http://localhost:3000/api
 
-###
+### 1) Salud DB
+GET {{baseUrl}}/ping-db
 
-GET http://localhost:3000/api/cursos
+### 2) Registro de usuario (simple)
+POST {{baseUrl}}/register
+Content-Type: application/json
 
-###
+{
+  "nombre": "Usuario",
+  "apellido": "Prueba",
+  "correo": "usuario.prueba@correo.com",
+  "password": "Password123"
+}
 
-GET http://localhost:3000/api/publicaciones
+### 3) Login (simple, sin token)
+POST {{baseUrl}}/login
+Content-Type: application/json
 
-###
+{
+  "correo": "usuario.prueba@correo.com",
+  "password": "Password123"
+}
 
-POST http://localhost:3000/api/publicaciones
+### 4) Listar cursos
+GET {{baseUrl}}/cursos
+
+### 5) Listar publicaciones
+GET {{baseUrl}}/publicaciones
+
+### 6) Crear publicacion
+POST {{baseUrl}}/publicaciones
 Content-Type: application/json
 
 {
   "id_usuario": 1,
   "id_curso": 1,
-  "titulo": "Prueba desde REST Client",
-  "contenido": "Todo funciona"
+  "titulo": "Publicacion desde REST Client",
+  "contenido": "Prueba backend simple"
 }
