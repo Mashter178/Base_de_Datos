@@ -1,0 +1,55 @@
+-- Comandos necesarios para probar MySQL en XAMPP
+
+-- 1. Conectarse a MySQL (desde línea de comandos)
+-- mysql -u root -p
+
+-- 2. Ver bases de datos existentes
+SHOW DATABASES;
+
+-- 3. Crear una nueva base de datos
+CREATE DATABASE prueba_xampp;
+
+-- 4. Seleccionar la base de datos
+USE prueba_xampp;
+
+-- 5. Crear una tabla de ejemplo
+CREATE TABLE usuarios (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE,
+    fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 6. Insertar datos de prueba
+INSERT INTO usuarios (nombre, email) VALUES ('Juan Pérez', 'juan@example.com');
+INSERT INTO usuarios (nombre, email) VALUES ('María García', 'maria@example.com');
+INSERT INTO usuarios (nombre, email) VALUES ('Carlos López', 'carlos@example.com');
+
+-- 7. Consultar datos
+SELECT * FROM usuarios;
+SELECT nombre, email FROM usuarios WHERE id = 1;
+
+-- 8. Actualizar datos
+UPDATE usuarios SET email = 'juan_nuevo@example.com' WHERE id = 1;
+
+-- 9. Eliminar datos
+DELETE FROM usuarios WHERE id = 3;
+
+-- 10. Ver estructura de tabla
+DESCRIBE usuarios;
+SHOW CREATE TABLE usuarios;
+
+-- 11. Eliminar tabla
+DROP TABLE usuarios;
+
+-- 12. Eliminar base de datos
+DROP DATABASE prueba_xampp;
+
+-- 13. Ver usuarios de MySQL
+SELECT User, Host FROM mysql.user;
+
+-- 14. Ver versión de MySQL
+SELECT VERSION();
+
+-- 15. Salir de MySQL
+-- EXIT; o QUIT;
